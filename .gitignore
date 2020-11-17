@@ -1,1 +1,11 @@
 *.txt
+source/S3_Shop/API/bin/
+source/S3_Shop/API/obj/
+source/S3_Shop/BLL/bin/
+source/S3_Shop/BLL/obj/
+source/S3_Shop/DAL/bin/
+source/S3_Shop/DAL/obj/
+source/S3_Shop/UI/bin/
+source/S3_Shop/UI/obj/
+source/S3_Shop/Model/bin/
+source/S3_Shop/Model/obj/
