@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_ShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="BillID" />
+    </Key>
+    <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PublishDate" Type="date" />
+    <Property Name="ToTalPrice" Type="int" />
+    <Property Name="CustomID" Type="int" />
+    <Property Name="EmployID" Type="int" />
+    <Property Name="DeliveryDate" Type="date" />
+    <Property Name="ShippingCost" Type="int" />
+    <Property Name="Sale" Type="int" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="Payment" Type="bit" />
+    <Property Name="VoucherID" Type="char" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="BILLINFO">
+    <Key>
+      <PropertyRef Name="BillID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="BillID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="int" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="CateID" />
+    </Key>
+    <Property Name="CateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QL_Shop.dbo.COUNTRY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="COUNTRY">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="CountryCode" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CountryCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CommonName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FormalName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryType" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountrySubType" Type="nvarchar" MaxLength="100" />
+    <Property Name="Sovereignty" Type="nvarchar" MaxLength="100" />
+    <Property Name="Capital" Type="nvarchar" MaxLength="100" />
+    <Property Name="CurrencyCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="CurrencyName" Type="nvarchar" MaxLength="100" />
+    <Property Name="TelephoneCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryCode3" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="InternetCountryCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="IsPublished" Type="bit" />
+    <Property Name="Flags" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CustomID" />
+    </Key>
+    <Property Name="CustomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="CustomName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="Pass" Type="varchar(max)" />
+    <Property Name="Statu" Type="bit" Nullable="false" />
+    <Property Name="TotalPrice" Type="int" />
+    <Property Name="MemID" Type="char" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DISTRICT">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ProvinceId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="LatiLongTude" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="IsPublished" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EmployID" />
+    </Key>
+    <Property Name="EmployID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployName" Type="varchar(max)" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pass" Type="varchar(max)" />
+    <Property Name="Statu" Type="bit" Nullable="false" />
+    <Property Name="GroupID" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="GROUPADMIN">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MEMBERSHIP">
+    <Key>
+      <PropertyRef Name="MemID" />
+    </Key>
+    <Property Name="MemID" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MinPrice" Type="int" />
+    <Property Name="MaxPrice" Type="int" />
+    <Property Name="Sale" Type="int" />
+  </EntityType>
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+    <Property Name="Descrip" Type="nvarchar(max)" />
+    <Property Name="PublishDate" Type="date" />
+  </EntityType>
+  <EntityType Name="PERMISION">
+    <Key>
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="PerID" Type="bit" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+    <Property Name="Statu" Type="bit" />
+    <Property Name="CateID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QL_Shop.dbo.PROVINCE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PROVINCE">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="TelephoneCode" Type="int" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="CountryCode" Type="nvarchar" MaxLength="2" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="IsPublished" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="STORE">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VOUCHER">
+    <Key>
+      <PropertyRef Name="VoucherID" />
+    </Key>
+    <Property Name="VoucherID" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Sale" Type="int" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QL_Shop.dbo.WARD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="WARD">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="DistrictID" />
+      <PropertyRef Name="SortOrder" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="LatiLongTude" Type="nvarchar" MaxLength="50" />
+    <Property Name="DistrictID" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <Association Name="FK__BILL__CustomID__2D27B809">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="CustomID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="CustomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__EmployID__2E1BDC42">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE">
+        <PropertyRef Name="EmployID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="EmployID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__VoucherID__30F848ED">
+    <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="VoucherID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="VoucherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__BillID__33D4B598">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILL">
+        <PropertyRef Name="BillID" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="BillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__Produc__34C8D9D1">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CUSTOMER__MemID__1920BF5C">
+    <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="0..1" />
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBERSHIP">
+        <PropertyRef Name="MemID" />
+      </Principal>
+      <Dependent Role="CUSTOMER">
+        <PropertyRef Name="MemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMPLOYEE__GroupI__267ABA7A">
+    <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="0..1" />
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPADMIN">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PERMISION__Group__398D8EEE">
+    <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="1" />
+    <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPADMIN">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="PERMISION">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PERMISION__RoleI__38996AB5">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+    <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="PERMISION">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCT__CateID__20C1E124">
+    <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="CateID" />
+      </Principal>
+      <Dependent Role="PRODUCT">
+        <PropertyRef Name="CateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QL_ShopModelStoreContainer">
+    <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BILLINFO" EntityType="Self.BILLINFO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GROUPADMIN" EntityType="Self.GROUPADMIN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEMBERSHIP" EntityType="Self.MEMBERSHIP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PERMISION" EntityType="Self.PERMISION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STORE" EntityType="Self.STORE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [COUNTRY].[Id] AS [Id], 
+    [COUNTRY].[CountryCode] AS [CountryCode], 
+    [COUNTRY].[CommonName] AS [CommonName], 
+    [COUNTRY].[FormalName] AS [FormalName], 
+    [COUNTRY].[CountryType] AS [CountryType], 
+    [COUNTRY].[CountrySubType] AS [CountrySubType], 
+    [COUNTRY].[Sovereignty] AS [Sovereignty], 
+    [COUNTRY].[Capital] AS [Capital], 
+    [COUNTRY].[CurrencyCode] AS [CurrencyCode], 
+    [COUNTRY].[CurrencyName] AS [CurrencyName], 
+    [COUNTRY].[TelephoneCode] AS [TelephoneCode], 
+    [COUNTRY].[CountryCode3] AS [CountryCode3], 
+    [COUNTRY].[CountryNumber] AS [CountryNumber], 
+    [COUNTRY].[InternetCountryCode] AS [InternetCountryCode], 
+    [COUNTRY].[SortOrder] AS [SortOrder], 
+    [COUNTRY].[IsPublished] AS [IsPublished], 
+    [COUNTRY].[Flags] AS [Flags], 
+    [COUNTRY].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[COUNTRY] AS [COUNTRY]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DISTRICT" EntityType="Self.DISTRICT" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DISTRICT].[Id] AS [Id], 
+    [DISTRICT].[Name] AS [Name], 
+    [DISTRICT].[Type] AS [Type], 
+    [DISTRICT].[LatiLongTude] AS [LatiLongTude], 
+    [DISTRICT].[ProvinceId] AS [ProvinceId], 
+    [DISTRICT].[SortOrder] AS [SortOrder], 
+    [DISTRICT].[IsPublished] AS [IsPublished], 
+    [DISTRICT].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[DISTRICT] AS [DISTRICT]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PROVINCE" EntityType="Self.PROVINCE" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PROVINCE].[Id] AS [Id], 
+    [PROVINCE].[Name] AS [Name], 
+    [PROVINCE].[Type] AS [Type], 
+    [PROVINCE].[TelephoneCode] AS [TelephoneCode], 
+    [PROVINCE].[ZipCode] AS [ZipCode], 
+    [PROVINCE].[CountryId] AS [CountryId], 
+    [PROVINCE].[CountryCode] AS [CountryCode], 
+    [PROVINCE].[SortOrder] AS [SortOrder], 
+    [PROVINCE].[IsPublished] AS [IsPublished], 
+    [PROVINCE].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[PROVINCE] AS [PROVINCE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="WARD" EntityType="Self.WARD" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [WARD].[Id] AS [Id], 
+    [WARD].[Name] AS [Name], 
+    [WARD].[Type] AS [Type], 
+    [WARD].[LatiLongTude] AS [LatiLongTude], 
+    [WARD].[DistrictID] AS [DistrictID], 
+    [WARD].[SortOrder] AS [SortOrder], 
+    [WARD].[IsPublished] AS [IsPublished], 
+    [WARD].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[WARD] AS [WARD]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__BILL__CustomID__2D27B809" Association="Self.FK__BILL__CustomID__2D27B809">
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__EmployID__2E1BDC42" Association="Self.FK__BILL__EmployID__2E1BDC42">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__VoucherID__30F848ED" Association="Self.FK__BILL__VoucherID__30F848ED">
+      <End Role="VOUCHER" EntitySet="VOUCHER" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__BillID__33D4B598" Association="Self.FK__BILLINFO__BillID__33D4B598">
+      <End Role="BILL" EntitySet="BILL" />
+      <End Role="BILLINFO" EntitySet="BILLINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__Produc__34C8D9D1" Association="Self.FK__BILLINFO__Produc__34C8D9D1">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="BILLINFO" EntitySet="BILLINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CUSTOMER__MemID__1920BF5C" Association="Self.FK__CUSTOMER__MemID__1920BF5C">
+      <End Role="MEMBERSHIP" EntitySet="MEMBERSHIP" />
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMPLOYEE__GroupI__267ABA7A" Association="Self.FK__EMPLOYEE__GroupI__267ABA7A">
+      <End Role="GROUPADMIN" EntitySet="GROUPADMIN" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PERMISION__Group__398D8EEE" Association="Self.FK__PERMISION__Group__398D8EEE">
+      <End Role="GROUPADMIN" EntitySet="GROUPADMIN" />
+      <End Role="PERMISION" EntitySet="PERMISION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PERMISION__RoleI__38996AB5" Association="Self.FK__PERMISION__RoleI__38996AB5">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="PERMISION" EntitySet="PERMISION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCT__CateID__20C1E124" Association="Self.FK__PRODUCT__CateID__20C1E124">
+      <End Role="CATEGORY" EntitySet="CATEGORY" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

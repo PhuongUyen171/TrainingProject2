@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="BillID" />
+    </Key>
+    <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PublishDate" Type="DateTime" Precision="0" />
+    <Property Name="ToTalPrice" Type="Int32" />
+    <Property Name="CustomID" Type="Int32" />
+    <Property Name="EmployID" Type="Int32" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="Sale" Type="Int32" />
+    <Property Name="VoucherID" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__BILL__CustomID__2D27B809" FromRole="BILL" ToRole="CUSTOMER" />
+    <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__BILL__EmployID__2E1BDC42" FromRole="BILL" ToRole="EMPLOYEE" />
+    <NavigationProperty Name="VOUCHER" Relationship="Self.FK__BILL__VoucherID__300424B4" FromRole="BILL" ToRole="VOUCHER" />
+    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__BillID__32E0915F" FromRole="BILL" ToRole="BILLINFO" />
+  </EntityType>
+  <EntityType Name="BILLINFO">
+    <Key>
+      <PropertyRef Name="BillID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="BillID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
+    <NavigationProperty Name="BILL" Relationship="Self.FK__BILLINFO__BillID__32E0915F" FromRole="BILLINFO" ToRole="BILL" />
+    <NavigationProperty Name="PRODUCT" Relationship="Self.FK__BILLINFO__Produc__33D4B598" FromRole="BILLINFO" ToRole="PRODUCT" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="CateID" />
+    </Key>
+    <Property Name="CateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CustomID" />
+    </Key>
+    <Property Name="CustomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Statu" Type="Boolean" />
+    <Property Name="TotalPrice" Type="Int32" />
+    <Property Name="MemID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__CustomID__2D27B809" FromRole="CUSTOMER" ToRole="BILL" />
+    <NavigationProperty Name="MEMBERSHIP" Relationship="Self.FK__CUSTOMER__MemID__1920BF5C" FromRole="CUSTOMER" ToRole="MEMBERSHIP" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EmployID" />
+    </Key>
+    <Property Name="EmployID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pass" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Statu" Type="Boolean" />
+    <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__EmployID__2E1BDC42" FromRole="EMPLOYEE" ToRole="BILL" />
+    <NavigationProperty Name="GROUPADMIN" Relationship="Self.FK__EMPLOYEE__GroupI__267ABA7A" FromRole="EMPLOYEE" ToRole="GROUPADMIN" />
+  </EntityType>
+  <EntityType Name="GROUPADMIN">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__GroupI__267ABA7A" FromRole="GROUPADMIN" ToRole="EMPLOYEE" />
+    <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__Group__38996AB5" FromRole="GROUPADMIN" ToRole="PERMISION" />
+  </EntityType>
+  <EntityType Name="MEMBERSHIP">
+    <Key>
+      <PropertyRef Name="MemID" />
+    </Key>
+    <Property Name="MemID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MinPrice" Type="Int32" />
+    <Property Name="MaxPrice" Type="Int32" />
+    <Property Name="Sale" Type="Int32" />
+    <NavigationProperty Name="CUSTOMERs" Relationship="Self.FK__CUSTOMER__MemID__1920BF5C" FromRole="MEMBERSHIP" ToRole="CUSTOMER" />
+  </EntityType>
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PublishDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="PERMISION">
+    <Key>
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PerID" Type="Boolean" />
+    <NavigationProperty Name="GROUPADMIN" Relationship="Self.FK__PERMISION__Group__38996AB5" FromRole="PERMISION" ToRole="GROUPADMIN" />
+    <NavigationProperty Name="ROLE" Relationship="Self.FK__PERMISION__RoleI__37A5467C" FromRole="PERMISION" ToRole="ROLES" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Statu" Type="Boolean" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__Produc__33D4B598" FromRole="PRODUCT" ToRole="BILLINFO" />
+    <NavigationProperty Name="PRODUCT1" Relationship="Self.FK__PRODUCT__Categor__20C1E124" FromRole="PRODUCT" ToRole="PRODUCT1" />
+    <NavigationProperty Name="PRODUCT2" Relationship="Self.FK__PRODUCT__Categor__20C1E124" FromRole="PRODUCT1" ToRole="PRODUCT" />
+  </EntityType>
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__RoleI__37A5467C" FromRole="ROLES" ToRole="PERMISION" />
+  </EntityType>
+  <EntityType Name="STORE">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VOUCHER">
+    <Key>
+      <PropertyRef Name="VoucherID" />
+    </Key>
+    <Property Name="VoucherID" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sale" Type="Int32" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__VoucherID__300424B4" FromRole="VOUCHER" ToRole="BILL" />
+  </EntityType>
+  <Association Name="FK__BILL__CustomID__2D27B809">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="CustomID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="CustomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__EmployID__2E1BDC42">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE">
+        <PropertyRef Name="EmployID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="EmployID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__VoucherID__300424B4">
+    <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="VoucherID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="VoucherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__BillID__32E0915F">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILL">
+        <PropertyRef Name="BillID" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="BillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__Produc__33D4B598">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CUSTOMER__MemID__1920BF5C">
+    <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="0..1" />
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBERSHIP">
+        <PropertyRef Name="MemID" />
+      </Principal>
+      <Dependent Role="CUSTOMER">
+        <PropertyRef Name="MemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMPLOYEE__GroupI__267ABA7A">
+    <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="0..1" />
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPADMIN">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PERMISION__Group__38996AB5">
+    <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="1" />
+    <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPADMIN">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="PERMISION">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PERMISION__RoleI__37A5467C">
+    <End Role="ROLES" Type="Self.ROLE" Multiplicity="1" />
+    <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="PERMISION">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCT__Categor__20C1E124">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="PRODUCT1" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="PRODUCT1">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="S3ShopModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BILLs" EntityType="Self.BILL" />
+    <EntitySet Name="BILLINFOes" EntityType="Self.BILLINFO" />
+    <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+    <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+    <EntitySet Name="GROUPADMINs" EntityType="Self.GROUPADMIN" />
+    <EntitySet Name="MEMBERSHIPs" EntityType="Self.MEMBERSHIP" />
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" />
+    <EntitySet Name="PERMISIONs" EntityType="Self.PERMISION" />
+    <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLE" />
+    <EntitySet Name="STOREs" EntityType="Self.STORE" />
+    <EntitySet Name="VOUCHERs" EntityType="Self.VOUCHER" />
+    <AssociationSet Name="FK__BILL__CustomID__2D27B809" Association="Self.FK__BILL__CustomID__2D27B809">
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="BILL" EntitySet="BILLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__EmployID__2E1BDC42" Association="Self.FK__BILL__EmployID__2E1BDC42">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+      <End Role="BILL" EntitySet="BILLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__VoucherID__300424B4" Association="Self.FK__BILL__VoucherID__300424B4">
+      <End Role="VOUCHER" EntitySet="VOUCHERs" />
+      <End Role="BILL" EntitySet="BILLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__BillID__32E0915F" Association="Self.FK__BILLINFO__BillID__32E0915F">
+      <End Role="BILL" EntitySet="BILLs" />
+      <End Role="BILLINFO" EntitySet="BILLINFOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__Produc__33D4B598" Association="Self.FK__BILLINFO__Produc__33D4B598">
+      <End Role="PRODUCT" EntitySet="PRODUCTs" />
+      <End Role="BILLINFO" EntitySet="BILLINFOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CUSTOMER__MemID__1920BF5C" Association="Self.FK__CUSTOMER__MemID__1920BF5C">
+      <End Role="MEMBERSHIP" EntitySet="MEMBERSHIPs" />
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMPLOYEE__GroupI__267ABA7A" Association="Self.FK__EMPLOYEE__GroupI__267ABA7A">
+      <End Role="GROUPADMIN" EntitySet="GROUPADMINs" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PERMISION__Group__38996AB5" Association="Self.FK__PERMISION__Group__38996AB5">
+      <End Role="GROUPADMIN" EntitySet="GROUPADMINs" />
+      <End Role="PERMISION" EntitySet="PERMISIONs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PERMISION__RoleI__37A5467C" Association="Self.FK__PERMISION__RoleI__37A5467C">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="PERMISION" EntitySet="PERMISIONs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCT__Categor__20C1E124" Association="Self.FK__PRODUCT__Categor__20C1E124">
+      <End Role="PRODUCT" EntitySet="PRODUCTs" />
+      <End Role="PRODUCT1" EntitySet="PRODUCTs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

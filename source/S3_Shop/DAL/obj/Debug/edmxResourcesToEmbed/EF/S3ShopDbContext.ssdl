@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_ShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="BillID" />
+    </Key>
+    <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PublishDate" Type="date" />
+    <Property Name="ToTalPrice" Type="int" />
+    <Property Name="CustomID" Type="int" />
+    <Property Name="EmployID" Type="int" />
+    <Property Name="DeliveryDate" Type="date" />
+    <Property Name="Sale" Type="int" />
+    <Property Name="VoucherID" Type="char" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="BILLINFO">
+    <Key>
+      <PropertyRef Name="BillID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="BillID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="int" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="CateID" />
+    </Key>
+    <Property Name="CateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CateName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CustomID" />
+    </Key>
+    <Property Name="CustomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="Pass" Type="varchar" MaxLength="50" />
+    <Property Name="Statu" Type="bit" />
+    <Property Name="TotalPrice" Type="int" />
+    <Property Name="MemID" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EmployID" />
+    </Key>
+    <Property Name="EmployID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployName" Type="varchar(max)" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pass" Type="char" MaxLength="50" />
+    <Property Name="Statu" Type="bit" />
+    <Property Name="GroupID" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="GROUPADMIN">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MEMBERSHIP">
+    <Key>
+      <PropertyRef Name="MemID" />
+    </Key>
+    <Property Name="MemID" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MinPrice" Type="int" />
+    <Property Name="MaxPrice" Type="int" />
+    <Property Name="Sale" Type="int" />
+  </EntityType>
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+    <Property Name="Descrip" Type="nvarchar(max)" />
+    <Property Name="PublishDate" Type="date" />
+  </EntityType>
+  <EntityType Name="PERMISION">
+    <Key>
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="PerID" Type="bit" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+    <Property Name="Statu" Type="bit" />
+    <Property Name="CategoryID" Type="int" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="STORE">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="char" MaxLength="10" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VOUCHER">
+    <Key>
+      <PropertyRef Name="VoucherID" />
+    </Key>
+    <Property Name="VoucherID" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Sale" Type="int" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="Images" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__BILL__CustomID__2D27B809">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="CustomID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="CustomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__EmployID__2E1BDC42">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE">
+        <PropertyRef Name="EmployID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="EmployID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__VoucherID__300424B4">
+    <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VOUCHER">
+        <PropertyRef Name="VoucherID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="VoucherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__BillID__32E0915F">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILL">
+        <PropertyRef Name="BillID" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="BillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__Produc__33D4B598">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CUSTOMER__MemID__1920BF5C">
+    <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="0..1" />
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBERSHIP">
+        <PropertyRef Name="MemID" />
+      </Principal>
+      <Dependent Role="CUSTOMER">
+        <PropertyRef Name="MemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMPLOYEE__GroupI__267ABA7A">
+    <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="0..1" />
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPADMIN">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PERMISION__Group__38996AB5">
+    <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="1" />
+    <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPADMIN">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="PERMISION">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PERMISION__RoleI__37A5467C">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+    <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="PERMISION">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCT__Categor__20C1E124">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="PRODUCT1" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="PRODUCT1">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QL_ShopModelStoreContainer">
+    <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BILLINFO" EntityType="Self.BILLINFO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GROUPADMIN" EntityType="Self.GROUPADMIN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEMBERSHIP" EntityType="Self.MEMBERSHIP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PERMISION" EntityType="Self.PERMISION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STORE" EntityType="Self.STORE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BILL__CustomID__2D27B809" Association="Self.FK__BILL__CustomID__2D27B809">
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__EmployID__2E1BDC42" Association="Self.FK__BILL__EmployID__2E1BDC42">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__VoucherID__300424B4" Association="Self.FK__BILL__VoucherID__300424B4">
+      <End Role="VOUCHER" EntitySet="VOUCHER" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__BillID__32E0915F" Association="Self.FK__BILLINFO__BillID__32E0915F">
+      <End Role="BILL" EntitySet="BILL" />
+      <End Role="BILLINFO" EntitySet="BILLINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__Produc__33D4B598" Association="Self.FK__BILLINFO__Produc__33D4B598">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="BILLINFO" EntitySet="BILLINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CUSTOMER__MemID__1920BF5C" Association="Self.FK__CUSTOMER__MemID__1920BF5C">
+      <End Role="MEMBERSHIP" EntitySet="MEMBERSHIP" />
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMPLOYEE__GroupI__267ABA7A" Association="Self.FK__EMPLOYEE__GroupI__267ABA7A">
+      <End Role="GROUPADMIN" EntitySet="GROUPADMIN" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PERMISION__Group__38996AB5" Association="Self.FK__PERMISION__Group__38996AB5">
+      <End Role="GROUPADMIN" EntitySet="GROUPADMIN" />
+      <End Role="PERMISION" EntitySet="PERMISION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PERMISION__RoleI__37A5467C" Association="Self.FK__PERMISION__RoleI__37A5467C">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="PERMISION" EntitySet="PERMISION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCT__Categor__20C1E124" Association="Self.FK__PRODUCT__Categor__20C1E124">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="PRODUCT1" EntitySet="PRODUCT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
