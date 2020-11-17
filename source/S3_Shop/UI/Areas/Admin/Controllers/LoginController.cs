@@ -21,7 +21,7 @@ namespace UI.Areas.Admin.Controllers
             url = "https://localhost:44379/api/Employee_API/";
         }
 
-        public ActionResult Index(string user, string pass)
+        public ActionResult Index(string user)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace UI.Areas.Admin.Controllers
         {
             try
             {
-                Session.Remove("ADMIN_SESSION");
+                Session.Remove(Constants.ADMIN_SESSION);
                 if (Response.Cookies["username"] != null)
                 {
                     HttpCookie ckUser = new HttpCookie("username");
@@ -81,8 +81,8 @@ namespace UI.Areas.Admin.Controllers
                 return View();
             else
             {
-                Session["ADMIN_SESSION"] = model;
-                return RedirectToAction("Index","Login",new { user=model.UserName,pass=model.Password});
+                Session[Constants.ADMIN_SESSION] = model;
+                return RedirectToAction("Index", "Login", new { user = model.UserName });
             }
         }
 

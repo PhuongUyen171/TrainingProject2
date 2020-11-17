@@ -13,6 +13,7 @@ namespace BLL
     public class ProductBLL
     {
         ProductDAL proDal = new ProductDAL();
+        #region Get Information 
         public List<ProductModel> GetAllProducts()
         {
             EntityMapper<PRODUCT, ProductModel> mapObj = new EntityMapper<DAL.EF.PRODUCT, Model.ProductModel>();
@@ -54,6 +55,21 @@ namespace BLL
             }
             return (List<Model.ProductModel>)products;
         }
+
+        public List<ProductModel> GetProductsBySearch(string tim)
+        {
+            EntityMapper<DAL.EF.PRODUCT, Model.ProductModel> mapObj = new EntityMapper<DAL.EF.PRODUCT, Model.ProductModel>();
+            List<DAL.EF.PRODUCT> list = new ProductDAL().GetProductsBySearch(tim);
+            List<Model.ProductModel> products = new List<Model.ProductModel>();
+            foreach (var item in list)
+            {
+                products.Add(mapObj.Translate(item));
+            }
+            return (List<Model.ProductModel>)products;
+        }
+        #endregion
+
+        #region Insert, Update, Delete
         public bool InsertProduct(ProductModel proInsert)
         {
             EntityMapper<ProductModel, PRODUCT> mapObj = new EntityMapper<ProductModel, PRODUCT>();
@@ -70,6 +86,6 @@ namespace BLL
         {
             return proDal.DeleteProduct(id);
         }
-
+        #endregion
     }
 }

@@ -22,6 +22,7 @@ namespace UI.Controllers
             return View(list);
         }
 
+        #region trang tĩnh
         public ActionResult ChinhSachBanHang()
         {
             return View();
@@ -51,6 +52,7 @@ namespace UI.Controllers
         {
             return View();
         }
+        #endregion
 
         public ActionResult TinTuc()
         {
@@ -62,6 +64,7 @@ namespace UI.Controllers
             
             return View(list);
         }
+        #region PartialView
         public ActionResult CategoryPartial()
         {
             var url = "https://localhost:44379/";
@@ -72,7 +75,11 @@ namespace UI.Controllers
 
             return View(list);
         }
-
+        public ActionResult SearchPartial()
+        {
+            return PartialView();
+        }
+        #endregion
         //public ActionResult ChiNhanhHaNoi()
         //{
         //    var hn = data.CUAHANGs.Where(m => m.Vung == "HN");

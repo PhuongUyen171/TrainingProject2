@@ -52,6 +52,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Model">
       <HintPath>..\Model\bin\Debug\Model.dll</HintPath>
@@ -291,10 +294,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountSocial.cs" />
+    <Compile Include="Models\AuthenticationEmail.cs" />
     <Compile Include="Models\EmailManager.cs" />
     <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\HasPermisionAttribute.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\UserLogin.cs" />
@@ -330,6 +336,10 @@
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\Shared\404.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\Home\SearchPartial.cshtml" />
+    <Content Include="Views\User\UserPartial.cshtml" />
+    <Content Include="Views\Product\SearchProducts.cshtml" />
+    <Content Include="Views\User\ProfileUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

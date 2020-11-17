@@ -29,5 +29,9 @@ namespace API.Controllers
         {
             return new ProductBLL().GetNewProductsByCount(count);
         }
+        public List<Model.ProductModel> GetProductsBySearch(string tim)
+        {
+            return new ProductBLL().GetProductsBySearch(tim);
+        }
     }
 }

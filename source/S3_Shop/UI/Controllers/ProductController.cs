@@ -43,5 +43,17 @@ namespace UI.Controllers
             }
             return this.View();
         }
+        [HttpPost]
+        public ActionResult SearchProducts(FormCollection c)
+        {
+            var url = "https://localhost:44379/";
+            ServiceRepository serviceObj = new ServiceRepository();
+            //List sản phẩm
+            var tim = c["searchText"];
+            HttpResponseMessage responseListProduct = serviceObj.GetResponse(url + "api/Product_API/GetProductsBySearch?tim=" + tim);
+            responseListProduct.EnsureSuccessStatusCode();
+            List<Model.ProductModel> list = responseListProduct.Content.ReadAsAsync<List<Model.ProductModel>>().Result;
+            return View(list);
+        }
     }
 }

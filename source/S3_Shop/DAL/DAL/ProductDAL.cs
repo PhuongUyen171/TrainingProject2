@@ -83,5 +83,9 @@ namespace DAL.DAL
         {
             return db.PRODUCTs.OrderByDescending(n => n.ProductID).Take(count).ToList();
         }
+        public List<PRODUCT> GetProductsBySearch(string tim)
+        {
+            return db.PRODUCTs.Where(t => t.ProductName.Contains(tim)).ToList();
+        }
     } 
 }

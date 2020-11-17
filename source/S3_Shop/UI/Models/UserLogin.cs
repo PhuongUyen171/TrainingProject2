@@ -17,7 +17,8 @@ namespace UI.Models
         [Required(ErrorMessage = "Mật khẩu không được để trống.")]
         [Display(Name = "Mật khẩu")]
         public string Password { set; get; }
-
+        public long UserID { set; get; }
+        public string FullName { set; get; }
         public UserLogin() {  }
 
     }
